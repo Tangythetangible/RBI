@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="Research Hub – MVP", layout="wide")
-st.title("Research Hub – MVP")
+st.title("Research Hub – MVP Test")
 
 st.markdown("""
 Internal research accelerator.
