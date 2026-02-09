@@ -67,3 +67,4 @@ if prices is not None:
         st.metric("Last price", f"{px.iloc[-1]['price']:,.2f}")
 st.write("Hello world")
 
+
