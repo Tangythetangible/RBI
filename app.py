@@ -31,20 +31,24 @@ prices = cons = earn = None
 if prices_file:
     prices = pd.read_csv(prices_file)
     validate(prices, ["ticker", "date", "price"], "Prices")
+    prices["date"] = pd.to_datetime(prices["date"], errors="coerce")
 
 if consensus_file:
     cons = pd.read_csv(consensus_file)
     validate(cons, ["ticker", "asof_date", "fiscal_period", "metric", "value"], "Consensus")
+    cons["asof_date"] = pd.to_datetime(cons["asof_date"], errors="coerce")
 
 if earnings_file:
     earn = pd.read_csv(earnings_file)
     validate(earn, ["ticker", "fiscal_period", "reported_date", "actual", "estimate", "metric"], "Earnings")
+    earn["reported_date"] = pd.to_datetime(earn["reported_date"], errors="coerce")
 
 if not any([prices is not None, cons is not None, earn is not None]):
     st.info("Upload at least one file to begin.")
     st.stop()
 
 st.success("Data loaded successfully.")
+st.write("Hello world")  # <- visible marker
 
 st.divider()
 
@@ -65,6 +69,3 @@ if prices is not None:
     px = prices[prices["ticker"] == ticker].sort_values("date")
     if not px.empty:
         st.metric("Last price", f"{px.iloc[-1]['price']:,.2f}")
-st.write("Hello world")
-
-
