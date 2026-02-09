@@ -62,4 +62,6 @@ st.divider()
 st.header(f"📊 {ticker} — Snapshot")
 
 if prices is not None:
-    px = prices[prices["ticker"] ==]()
+    px = prices[prices["ticker"] == ticker].sort_values("date")
+    if not px.empty:
+        st.metric("Last price", f"{px.iloc[-1]['price']:,.2f}")
